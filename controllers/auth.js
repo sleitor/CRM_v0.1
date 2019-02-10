@@ -1,16 +1,26 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const keys = require('../config/keys');
 const {User} = require('../models/User');
 
 module.exports.login = async (req, res) => {
   const {email, password} = req.body;
 
-  const candidate = User.findOne({email});
+  const candidate = await User.findOne({email});
 
   if (candidate) {
     //do password check
     const passwordCompare = bcrypt.compareSync(password, candidate.password);
     if (passwordCompare) {
       // create token
+      const token = jwt.sign({
+        email,
+        _id: candidate._id
+      }, keys.jwtSecret, {expiresIn: '1h'});
+      res.status(200).json({
+        token: `Bearer ${token}`
+      })
     } else {
       res.status(401).json({
         message: 'Password didn\'t mach'
@@ -21,10 +31,6 @@ module.exports.login = async (req, res) => {
       message: 'User not found'
     });
   }
-  res.status(200).json({
-    login: req.body.email,
-    password: req.body.password
-  })
 };
 
 module.exports.register = async (req, res) => {
