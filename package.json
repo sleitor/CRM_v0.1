@@ -1,0 +1,24 @@
+{
+  "name": "fullstack",
+  "version": "1.0.0",
+  "description": "Web app with NodeJS Express and Angular",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./",
+    "server": "nodemon ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Express",
+    "angular",
+    "node"
+  ],
+  "author": "DmitryT",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
