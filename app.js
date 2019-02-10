@@ -10,7 +10,10 @@ const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true })
+mongoose.connect(keys.mongoURI, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+})
   .then(() => console.log('MongoDB connected'))
   .catch(e => console.log(e));
 

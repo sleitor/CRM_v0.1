@@ -1,3 +1,5 @@
+const { User } = require('../models/User');
+
 module.exports.login = (req, res) => {
   res.status(200).json({
     login: req.body.email,
@@ -6,7 +8,15 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.register = (req, res) => {
-  res.status(200).json({
-    message: 'register from controller'
-  })
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password
+  });
+
+  user.save()
+    .then(() => res.status(200).json({message: 'User created'}))
+    .catch((e) => {
+      console.log(e);
+      res.status(400).json({message: 'Something wrong'});
+    });
 };

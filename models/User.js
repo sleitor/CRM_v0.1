@@ -12,4 +12,6 @@ const model = {
   }
 };
 
-module.exports = mongoose.model('users', new mongoose.Schema(model));
+module.exports = {
+  User: mongoose.model('users', new mongoose.Schema(model)),
+};
