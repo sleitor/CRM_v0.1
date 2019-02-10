@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const {User} = require('../models/User');
 
 module.exports.login = (req, res) => {
@@ -18,7 +19,11 @@ module.exports.register = async (req, res) => {
     });
   } else {
     // Creating user process
-    const user = await new User({email, password}).save();
+    const salt = bcrypt.genSaltSync();
+    const user = await new User({
+      email,
+      password: bcrypt.hashSync(password, salt)
+    }).save();
     res.status(201).json({
       message: 'User created',
       user
