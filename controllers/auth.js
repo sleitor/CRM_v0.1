@@ -7,7 +7,7 @@ const {User} = require('../models/User');
 module.exports.login = async (req, res) => {
   const {email, password} = req.body;
 
-  const candidate = await User.findOne({email});
+  const candidate = await User.findOne({email}).lean();
 
   if (candidate) {
     //do password check

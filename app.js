@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const mongoose = require('mongoose');
 const app = express();
 
@@ -15,7 +16,12 @@ mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
 })
   .then(() => console.log('MongoDB connected'))
-  .catch(e => console.log(e));
+  .catch(e =>
+    console.log('error', e)
+  );
+
+app.use(passport.initialize({ userProperty: 'user' }));
+require('./middleware/passport')(passport);
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
