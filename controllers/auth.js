@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const keys = require('../config/keys');
 const {User} = require('../models/User');
+const errorHandler = require('../utils/errorHandler');
 
 module.exports.login = async (req, res) => {
   const {email, password} = req.body;
@@ -45,13 +46,17 @@ module.exports.register = async (req, res) => {
   } else {
     // Creating user process
     const salt = bcrypt.genSaltSync();
-    const user = await new User({
-      email,
-      password: bcrypt.hashSync(password, salt)
-    }).save();
-    res.status(201).json({
-      message: 'User created',
-      user
-    })
+    try {
+      const user = await new User({
+        email,
+        password: bcrypt.hashSync(password, salt)
+      }).save();
+      res.status(201).json({
+        message: 'User created',
+        user
+      })
+    } catch (e) {
+      errorHandler(res, e)
+    }
   }
 };
