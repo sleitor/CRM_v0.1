@@ -15,4 +15,4 @@ const model = {
   },
 };
 
-module.exports = mongoose.model('categories', new mongoose.Schema(model));
+module.exports = {Category: mongoose.model('categories', new mongoose.Schema(model))};
