@@ -32,7 +32,7 @@ module.exports.create = async (req, res) => {
   const category = new Category({
     name: req.body.name,
     user: req.user._id,
-    imageSrc: req.file ? req.file.path : ''
+    imageSrc: req.file ? req.file.path : '',
   });
   try {
     await category.save();
@@ -44,9 +44,14 @@ module.exports.create = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
+  const updated = {
+    name: req.body.name,
+  };
+  if (req.file) {
+    updated.imageSrc = req.file.path;
+  }
   try {
-    // todo
-    // return await Category.find({user: req.user.id})
+    res.json(await Category.findByIdAndUpdate(req.params.id, updated, {new: true}));
   } catch (e) {
     errorHandler(res, e)
   }
