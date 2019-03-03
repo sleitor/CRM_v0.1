@@ -1,9 +1,36 @@
 const {Order} = require('../models/Order');
 const errorHandler = require('../utils/errorHandler');
 
+// (get) localhost:5000/order?skip=15&limit=5&start=<date>&end=<date>&order=4
 module.exports.getAll = async (req, res) => {
+  const query = {
+    user: req.user._id
+  };
+
+  if (req.query.start) {
+    query.date = {
+      $gte: req.query.start,
+    }
+  }
+
+  if (req.query.end) {
+    if (!query.date) query.date = {};
+
+    query.date.$lte = req.query.end;
+  }
+
+  if (req.query.order) {
+    query.order = req.query.order
+  }
+
   try {
-    return res.json(await Order.find({user: req.user.id}));
+    const orders = await Order
+      .find(query)
+      .sort({date: -1})
+      .skip(+req.query.skip)
+      .limit(+req.query.limit)
+      .lean();
+    return res.status(200).json(orders);
   } catch (e) {
     errorHandler(res, e)
   }
