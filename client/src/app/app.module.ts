@@ -8,7 +8,8 @@ import {AuthLayoutComponent} from './shared/layout/auth-layout/auth-layout.compo
 import {MainLayoutComponent} from './shared/layout/main-layout/main-layout.component';
 import {RegisterPageComponent} from './register-page/register-page.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,13 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
