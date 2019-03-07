@@ -14,7 +14,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { AuthLayoutComponent } from './shared/layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
-import { LoaderComponent } from './shred/components/loader/loader.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -35,16 +35,16 @@ import { LoaderComponent } from './shred/components/loader/loader.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
-      useClass: TokenInterceptor
-    }
+      useClass: TokenInterceptor,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

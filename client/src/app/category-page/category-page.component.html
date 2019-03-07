@@ -1,20 +1,14 @@
 <div class="page-title">
   <h4>Категории</h4>
-  <button class="waves-effect waves-light btn grey darken-1">Добавить категорию</button>
+  <button routerLink="/category/new" class="waves-effect waves-light btn grey darken-1">Добавить категорию</button>
 </div>
 
 <div class="row">
   <div class="col s12">
-    <div class="collection">
-      <a href="#!" class="collection-item">Категория 1</a>
-      <a href="#!" class="collection-item">Категория 1</a>
-      <a href="#!" class="collection-item">Категория 1</a>
-      <a href="#!" class="collection-item">Категория 1</a>
-      <a href="#!" class="collection-item">Категория 1</a>
-      <a href="#!" class="collection-item active">Категория 2</a>
-      <a href="#!" class="collection-item">Категория 1</a>
-      <a href="#!" class="collection-item">Категория 1</a>
+    <div class="collection" *ngIf="!loading">
+      <a *ngFor="let category of categories" class="collection-item">{{category.name}}</a>
     </div>
   </div>
 </div>
 
+<app-loader *ngIf="loading"></app-loader>
