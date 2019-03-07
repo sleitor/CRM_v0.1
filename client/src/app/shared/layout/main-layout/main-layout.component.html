@@ -1,11 +1,13 @@
 <!--SIDEBAR-->
 <ul class="sidenav sidenav-fixed a-sidenav">
   <h4>Newborn</h4>
-  <li class="bold active"><a href="#" class="waves-effect waves-orange">Обзор</a></li>
-  <li class="bold"><a href="#" class="waves-effect waves-orange">Аналитика</a></li>
-  <li class="bold"><a href="#" class="waves-effect waves-orange">История</a></li>
-  <li class="bold"><a href="#" class="waves-effect waves-orange">Добавить заказ</a></li>
-  <li class="bold "><a href="#" class="waves-effect waves-orange">Ассортимент</a></li>
+  <li
+    *ngFor="let link of links"
+    routerLinkActive="active"
+    class="bold"
+  >
+    <a [routerLink]="link.path" class="waves-effect waves-orange">{{link.name}}</a>
+  </li>
   <li class="bold last"><a (click)="logout()" class="waves-effect waves-orange">Выйти</a></li>
 </ul>
 <!--CONTENT-->

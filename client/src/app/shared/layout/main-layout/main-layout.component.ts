@@ -9,6 +9,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MainLayoutComponent implements OnInit {
 
+  links = [
+    { path: '/overview', name: 'Обзор' },
+    { path: '/analytics', name: 'Аналитика' },
+    { path: '/history', name: 'История' },
+    { path: '/order', name: 'Добавить заказ' },
+    { path: '/category', name: 'Ассортимент' },
+  ];
+
   constructor(
     private router: Router,
     private auth: AuthService,
