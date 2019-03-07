@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "../shared/services/auth.service";
+import {MaterialService} from "../shared/services/material.service";
 
 @Component({
   selector: 'app-register-page',
@@ -37,7 +38,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         }
       }),
       error => {
-        console.warn('Error', error);
+        MaterialService.toast(error.error.message);
         this.form.enable();
       },
     );
