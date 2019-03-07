@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MaterialService } from '../../services/material.service';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements AfterViewInit {
+
+  @ViewChild('float') floatRef;
 
   links = [
     { path: '/overview', name: 'Обзор' },
@@ -23,7 +26,8 @@ export class MainLayoutComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    MaterialService.floatingActionButton(this.floatRef);
   }
 
   logout() {
