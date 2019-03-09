@@ -15,7 +15,6 @@ export class MaterialService {
   }
 
   static floatingActionButton(ref: ElementRef) {
-    console.log(ref);
     M.FloatingActionButton.init(ref.nativeElement);
   }
 }

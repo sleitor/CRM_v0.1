@@ -15,6 +15,8 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { AuthLayoutComponent } from './shared/layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { CategoryFormComponent } from './category-page/category-form/category-form.component';
+import { PositionFormComponent } from './category-page/category-form/position-form/position-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     HistoryPageComponent,
     AnalyticsPageComponent,
     LoaderComponent,
+    CategoryFormComponent,
+    PositionFormComponent,
   ],
   imports: [
     BrowserModule,
