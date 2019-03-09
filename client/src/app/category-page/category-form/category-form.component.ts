@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -8,6 +9,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class CategoryFormComponent implements OnInit {
   isNew = true;
+  form: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -15,9 +17,15 @@ export class CategoryFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      name: new FormControl(null, Validators.required),
+    });
     this.route.params.subscribe((params: Params) => {
       this.isNew = !params.id;
     });
   }
 
+  onSubmit() {
+    console.log('1');
+  }
 }
