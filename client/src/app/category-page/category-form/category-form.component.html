@@ -27,7 +27,8 @@
     </div>
 
     <div>
-      <button type="button" class="waves-effect waves-light btn orange lighten-2 mb2">
+      <input type="file" class="hide" (change)="loadFile($event)" #file>
+      <button type="button" (click)="selectFile()" class="waves-effect waves-light btn orange lighten-2 mb2">
         <i class="material-icons left">backup</i>
         Загрузить изображение
       </button>
@@ -41,7 +42,7 @@
   </form>
 
   <div class="col s12 l4 center">
-    <img class="responsive-img" style="height: 200px" src="cake.jpg">
+    <img class="responsive-img h200" [src]="imagePreview" *ngIf="imagePreview" alt="preview">
   </div>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -15,6 +15,9 @@ import { MaterialService } from '../../shared/services/material.service';
 export class CategoryFormComponent implements OnInit {
   isNew = true;
   form: FormGroup;
+  @ViewChild('file') fileRef: ElementRef;
+  file: File;
+  imagePreview: string | ArrayBuffer;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +37,10 @@ export class CategoryFormComponent implements OnInit {
       }),
     ).subscribe(
       (category: Category) => {
-        if (category) this.form.patchValue({ name: category.name });
+        if (category) {
+          this.form.patchValue({ name: category.name });
+          this.imagePreview = category.imageSrc;
+        }
         MaterialService.updateForm();
       },
       (error => MaterialService.toast(error.error.message)),
@@ -43,5 +49,21 @@ export class CategoryFormComponent implements OnInit {
 
   onSubmit() {
     console.log('1');
+  }
+
+  loadFile(event) {
+    // or we can make it with view child
+    // this.file = this.fileRef.nativeElement.files[0];
+    this.file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(this.file);
+  }
+
+  selectFile() {
+    this.fileRef.nativeElement.click();
   }
 }
