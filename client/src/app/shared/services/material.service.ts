@@ -17,4 +17,8 @@ export class MaterialService {
   static floatingActionButton(ref: ElementRef) {
     M.FloatingActionButton.init(ref.nativeElement);
   }
+
+  static updateForm() {
+    M.updateTextFields();
+  }
 }
