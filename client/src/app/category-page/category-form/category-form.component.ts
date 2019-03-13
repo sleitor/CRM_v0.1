@@ -18,6 +18,7 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('file') fileRef: ElementRef;
   file: File;
   imagePreview: string | ArrayBuffer;
+  private categoryId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,8 +32,9 @@ export class CategoryFormComponent implements OnInit {
     });
     this.route.params.pipe(
       pluck('id'),
-      switchMap((id) => {
+      switchMap((id: string) => {
         this.isNew = !id;
+        this.categoryId = id;
         return id ? this.categoryService.getById(id) : of(null);
       }),
     ).subscribe(
@@ -48,7 +50,24 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('1');
+    this.form.disable();
+    let obs$;
+    if (this.isNew) {
+      obs$ = this.categoryService.create(this.form.value.name, this.file);
+    } else {
+      obs$ = this.categoryService.update(this.categoryId, this.form.value.name, this.file);
+    }
+
+    obs$.subscribe(
+      () => {
+        MaterialService.toast('Category saved');
+        this.form.enable();
+      },
+      error => {
+        MaterialService.toast(error.error.message);
+        this.form.enable();
+      },
+    );
   }
 
   loadFile(event) {
