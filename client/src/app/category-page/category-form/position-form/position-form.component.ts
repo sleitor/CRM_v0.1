@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Position } from '../../../shared/interfaces';
+import { PositionService } from '../../../shared/services/position.service';
 
 @Component({
   selector: 'app-position-form',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PositionFormComponent implements OnInit {
 
-  constructor() { }
+  @Input() categoryId: string;
+  positions: Position[];
+  isLoading = true;
+
+  constructor(
+    private positionService: PositionService,
+  ) {
+  }
 
   ngOnInit() {
+    this.positionService.fetch(this.categoryId).subscribe(positions => {
+      this.isLoading = false;
+      this.positions = positions;
+    });
   }
+
+
 
 }

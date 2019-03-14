@@ -7,12 +7,20 @@
       </button>
     </div>
 
-    <div class="collection">
-      <a class="collection-item collection-item-icon">
-        <span>Кофе <strong>20 руб.</strong></span>
+    <div *ngIf="!isLoading; else loading">
+      <div class="collection" *ngIf="positions.length; else empty">
+        <a class="collection-item collection-item-icon" *ngFor="let pos of positions">
+          <span>{{pos.name}} <strong>{{pos.cost}} руб.</strong></span>
         <span><i class="material-icons">delete</i></span>
       </a>
     </div>
+      <ng-template #empty>
+        <div class="center">Positions is empty</div>
+      </ng-template>
+  </div>
+    <ng-template #loading>
+      <app-loader></app-loader>
+    </ng-template>
   </div>
 </div>
 

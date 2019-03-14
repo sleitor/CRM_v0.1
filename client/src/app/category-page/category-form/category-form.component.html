@@ -46,4 +46,8 @@
   </div>
 </div>
 
-<!--<app-position-form></app-position-form>-->
+<app-position-form
+  *ngIf="categoryId"
+  [categoryId]="categoryId"
+>
+</app-position-form>

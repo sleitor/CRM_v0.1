@@ -18,7 +18,7 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('file') fileRef: ElementRef;
   file: File;
   imagePreview: string | ArrayBuffer;
-  private categoryId: string;
+  categoryId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -74,7 +74,7 @@ export class CategoryFormComponent implements OnInit {
   delete() {
     const decidion = window.confirm(`Do you really want delete category ${this.form.value.name}`);
 
-    decidion && this.categoryService.delete<Response>(this.categoryId).subscribe(
+    decidion && this.categoryService.delete(this.categoryId).subscribe(
       resp => MaterialService.toast(resp.message),
       error1 => MaterialService.toast(error1.error.message),
       () => this.router.navigate(['/category']),
