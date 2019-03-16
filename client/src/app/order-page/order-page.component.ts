@@ -21,6 +21,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private orderPageService: OrderPageService,
   ) {
   }
 
