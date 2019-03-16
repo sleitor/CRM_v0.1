@@ -40,6 +40,7 @@ module.exports.create = async (req, res) => {
   try {
     const lastOrder = await Order.findOne({user: req.user._id}).sort({_id: -1}).lean();
     let order = lastOrder ? lastOrder.order : 0;
+    order++;
 
     const newOrder = await new Order({
       list: req.body.list,

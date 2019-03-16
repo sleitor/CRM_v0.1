@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { OrderPositon } from '../shared/interfaces';
+import { Order, OrderPositon } from '../shared/interfaces';
 import { MaterialModalInstance, MaterialService } from '../shared/services/material.service';
+import { OrderService } from '../shared/services/order.service';
 import { OrderPageService } from './order-page.service';
 
 @Component({
@@ -18,11 +19,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
   modal: MaterialModalInstance;
   isRoot: boolean = this.router.url === '/order';
   destroy$ = new Subject;
+  processing = false;
 
 
   constructor(
     private router: Router,
     private orderPageService: OrderPageService,
+    private orderService: OrderService,
   ) {
   }
 
@@ -58,7 +61,25 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmit() {
-    this.modal.close();
+    this.processing = true;
+    const order: Order = {
+      list: this.orderPageService.list.map(l => {
+        delete l._id;
+        return l;
+      }),
+    };
+
+    this.orderService.create(order).subscribe(
+      savedOrder => {
+        MaterialService.toast(`Order #${savedOrder.order} saved`);
+        this.modal.close();
+        this.orderPageService.clear();
+      },
+      error => MaterialService.toast(error.error.message),
+      () => {
+        this.processing = false;
+      },
+    );
   }
 
   onDeletePosition(item: OrderPositon) {

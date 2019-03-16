@@ -31,6 +31,8 @@ export class OrderPageService {
   }
 
   clear() {
+    this.list = [];
+    this.price = 0;
 
   }
 
