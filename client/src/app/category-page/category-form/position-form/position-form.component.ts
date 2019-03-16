@@ -17,6 +17,7 @@ export class PositionFormComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoading = true;
   private modalInstance: MaterialModalInstance;
   form: FormGroup;
+  positionId: string;
 
   constructor(
     private positionService: PositionService,
@@ -43,8 +44,22 @@ export class PositionFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.modalInstance.destroy();
   }
 
-  openModal(pos?: Position) {
-    console.log(pos);
+  openModalSelected(pos: Position) {
+    this.positionId = pos._id;
+    this.form.patchValue({
+      name: pos.name,
+      cost: pos.cost,
+    });
+    this.modalInstance.open();
+    MaterialService.updateForm();
+  }
+
+  openModal() {
+    this.positionId = null;
+    this.form.reset({
+      name: null,
+      cost: 1,
+    });
     this.modalInstance.open();
   }
 
@@ -61,17 +76,30 @@ export class PositionFormComponent implements OnInit, AfterViewInit, OnDestroy {
       category: this.categoryId,
     };
 
-    this.positionService.create(newPosition).subscribe(
-      position => {
-        MaterialService.toast('Position Created');
-        this.positions.push(position);
-        this.form.reset({ name: null, cost: 1 });
-        this.modalInstance.close();
-      },
-      error => MaterialService.toast(error.error.message),
-      () => {
-        this.form.enable();
-      });
+    if (this.positionId) {
+      newPosition._id = this.positionId;
+      this.positionService.update(newPosition).subscribe(
+        position => {
+          MaterialService.toast('Position updated');
+          const idx = this.positions.findIndex(p => p._id === newPosition._id);
+          this.positions[idx] = position;
+          this.form.reset({ name: null, cost: 1 });
+          this.modalInstance.close();
+        },
+        error => MaterialService.toast(error.error.message),
+        () => this.form.enable());
+    } else {
+      this.positionService.create(newPosition).subscribe(
+        position => {
+          MaterialService.toast('Position created');
+          this.positions.push(position);
+          this.form.reset({ name: null, cost: 1 });
+          this.modalInstance.close();
+        },
+        error => MaterialService.toast(error.error.message),
+        () => this.form.enable());
+    }
+
   }
 
   delete(pos: Position) {

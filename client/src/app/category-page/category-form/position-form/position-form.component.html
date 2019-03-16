@@ -14,7 +14,7 @@
       <div class="collection" *ngIf="positions.length; else empty">
         <a
           *ngFor="let pos of positions"
-          (click)="openModal(pos)"
+          (click)="openModalSelected(pos)"
           class="collection-item collection-item-icon"
         >
           <span>{{pos.name}} <strong>{{pos.cost}} руб.</strong></span>
