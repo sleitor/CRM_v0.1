@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Order } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-history-table',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./history-table.component.scss']
 })
 export class HistoryTableComponent implements OnInit {
+
+  @Input() orders: Order[];
 
   constructor() { }
 

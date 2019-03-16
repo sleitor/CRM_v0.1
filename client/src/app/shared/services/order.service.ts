@@ -16,4 +16,8 @@ export class OrderService {
   create(order: Order): Observable<Order> {
     return this.http.post<Order>('/api/order', order);
   }
+
+  fetch(params): Observable<Order[]> {
+    return this.http.get<Order[]>('/api/order', { params });
+  }
 }

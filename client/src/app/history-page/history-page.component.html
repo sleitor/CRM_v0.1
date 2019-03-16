@@ -13,7 +13,7 @@
 </div>
 
 <app-history-filter *ngIf="isFilterShow"></app-history-filter>
-<app-history-table></app-history-table>
+<app-history-table [orders]="orders"></app-history-table>
 
 <div class="center mb2">
   <button class="btn waves-effect grey darken-1 btn-small">Загрузить еще</button>
