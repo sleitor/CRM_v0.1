@@ -3,11 +3,13 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MaterialModalInstance, MaterialService } from '../shared/services/material.service';
+import { OrderPageService } from './order-page.service';
 
 @Component({
   selector: 'app-order-page',
   templateUrl: './order-page.component.html',
-  styleUrls: ['./order-page.component.scss']
+  styleUrls: ['./order-page.component.scss'],
+  providers: [OrderPageService],
 })
 export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
