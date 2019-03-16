@@ -1,17 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MaterialModalInstance, MaterialService } from '../shared/services/material.service';
 
 @Component({
   selector: 'app-order-page',
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.scss']
 })
-export class OrderPageComponent implements OnInit, OnDestroy {
+export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @ViewChild('modal') modalRef: ElementRef;
+  modal: MaterialModalInstance;
   isRoot: boolean = this.router.url === '/order';
   destroy$ = new Subject;
+
 
   constructor(
     private router: Router,
@@ -33,6 +37,23 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.modal.destroy();
   }
 
+  ngAfterViewInit(): void {
+    this.modal = MaterialService.initModal(this.modalRef);
+  }
+
+
+  openModal() {
+    this.modal.open();
+  }
+
+  onCancel() {
+    this.modal.close();
+  }
+
+  onSubmit() {
+    this.modal.close();
+  }
 }
