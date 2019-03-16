@@ -24,7 +24,9 @@ export class OrderPageService {
 
   }
 
-  remove() {
+  remove(position: OrderPositon) {
+    this.list = this.list.filter(p => p._id !== position._id);
+    this.computePrice();
 
   }
 

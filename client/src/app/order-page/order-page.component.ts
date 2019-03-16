@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { OrderPositon } from '../shared/interfaces';
 import { MaterialModalInstance, MaterialService } from '../shared/services/material.service';
 import { OrderPageService } from './order-page.service';
 
@@ -58,5 +59,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSubmit() {
     this.modal.close();
+  }
+
+  onDeletePosition(item: OrderPositon) {
+    this.orderPageService.remove(item)
   }
 }
