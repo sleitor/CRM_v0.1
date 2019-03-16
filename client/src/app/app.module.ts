@@ -17,6 +17,8 @@ import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.com
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CategoryFormComponent } from './category-page/category-form/category-form.component';
 import { PositionFormComponent } from './category-page/category-form/position-form/position-form.component';
+import { CategoriesPageComponent } from './order-page/categories-page/categories-page.component';
+import { PositionsPageComponent } from './order-page/positions-page/positions-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { PositionFormComponent } from './category-page/category-form/position-fo
     LoaderComponent,
     CategoryFormComponent,
     PositionFormComponent,
+    CategoriesPageComponent,
+    PositionsPageComponent,
   ],
   imports: [
     BrowserModule,

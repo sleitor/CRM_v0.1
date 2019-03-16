@@ -5,7 +5,9 @@ import { CategoryFormComponent } from './category-page/category-form/category-fo
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { CategoriesPageComponent } from './order-page/categories-page/categories-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
+import { PositionsPageComponent } from './order-page/positions-page/positions-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthGuard } from './shared/classes/auth.guard';
@@ -30,7 +32,12 @@ const routes: Routes = [
       { path: 'overview', component: OverviewPageComponent },
       { path: 'analytics', component: AnalyticsPageComponent },
       { path: 'history', component: HistoryPageComponent },
-      { path: 'order', component: OrderPageComponent },
+      {
+        path: 'order', component: OrderPageComponent, children: [
+          { path: '', component: CategoriesPageComponent },
+          { path: ':id', component: PositionsPageComponent },
+        ],
+      },
       { path: 'category', component: CategoryPageComponent },
       { path: 'category/new', component: CategoryFormComponent },
       { path: 'category/:id', component: CategoryFormComponent },
