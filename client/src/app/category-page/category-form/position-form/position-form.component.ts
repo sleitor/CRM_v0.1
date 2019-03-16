@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Position } from '../../../shared/interfaces';
-import { MaterialModalInstance, MaterialService } from '../../../shared/services/material.service';
+import { MaterialInstance, MaterialService } from '../../../shared/services/material.service';
 import { PositionService } from '../../../shared/services/position.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class PositionFormComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('modal') modalRef: ElementRef;
   positions: Position[];
   isLoading = true;
-  private modalInstance: MaterialModalInstance;
+  private modalInstance: MaterialInstance;
   form: FormGroup;
   positionId: string;
 

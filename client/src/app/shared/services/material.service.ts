@@ -2,7 +2,7 @@ declare var M;
 
 import { ElementRef, Injectable } from '@angular/core';
 
-export interface MaterialModalInstance {
+export interface MaterialInstance {
   open?(): void;
 
   close?(): void;
@@ -30,7 +30,11 @@ export class MaterialService {
     M.updateTextFields();
   }
 
-  static initModal(modal: ElementRef): MaterialModalInstance {
+  static initModal(modal: ElementRef): MaterialInstance {
     return M.Modal.init(modal.nativeElement);
+  }
+
+  static initTooltip(tooltip: ElementRef): MaterialInstance {
+    return M.Tooltip.init(tooltip.nativeElement);
   }
 }

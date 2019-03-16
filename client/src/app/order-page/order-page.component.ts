@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Order, OrderPositon } from '../shared/interfaces';
-import { MaterialModalInstance, MaterialService } from '../shared/services/material.service';
+import { MaterialInstance, MaterialService } from '../shared/services/material.service';
 import { OrderService } from '../shared/services/order.service';
 import { OrderPageService } from './order-page.service';
 
@@ -16,7 +16,7 @@ import { OrderPageService } from './order-page.service';
 export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('modal') modalRef: ElementRef;
-  modal: MaterialModalInstance;
+  modal: MaterialInstance;
   isRoot: boolean = this.router.url === '/order';
   destroy$ = new Subject;
   processing = false;

@@ -19,6 +19,8 @@ import { CategoryFormComponent } from './category-page/category-form/category-fo
 import { PositionFormComponent } from './category-page/category-form/position-form/position-form.component';
 import { CategoriesPageComponent } from './order-page/categories-page/categories-page.component';
 import { PositionsPageComponent } from './order-page/positions-page/positions-page.component';
+import { HistoryFilterComponent } from './history-page/history-filter/history-filter.component';
+import { HistoryTableComponent } from './history-page/history-table/history-table.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { PositionsPageComponent } from './order-page/positions-page/positions-pa
     PositionFormComponent,
     CategoriesPageComponent,
     PositionsPageComponent,
+    HistoryFilterComponent,
+    HistoryTableComponent,
   ],
   imports: [
     BrowserModule,
