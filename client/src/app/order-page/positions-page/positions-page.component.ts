@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Position } from '../../shared/interfaces';
+import { MaterialService } from '../../shared/services/material.service';
 import { PositionService } from '../../shared/services/position.service';
 import { OrderPageService } from '../order-page.service';
 
@@ -34,5 +35,6 @@ export class PositionsPageComponent implements OnInit {
 
   addToOrder(position: Position) {
     this.orderPageService.add(position);
+    MaterialService.toast(`Position added x${position.quantity}`);
   }
 }
