@@ -15,7 +15,7 @@ module.exports.getByCategoryId = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
   try {
-    await Position.delete({_id: req.params.id, user: req.user.id});
+    await Position.remove({ _id: req.params.id, user: req.user.id });
     res.status(200).json({
       success: true,
       message: "Position was deleted"

@@ -18,7 +18,7 @@
           class="collection-item collection-item-icon"
         >
           <span>{{pos.name}} <strong>{{pos.cost}} руб.</strong></span>
-          <span><i (click)="delete(pos)" class="material-icons">delete</i></span>
+          <span><i (click)="delete($event, pos)" class="material-icons">delete</i></span>
         </a>
       </div>
       <ng-template #empty>
