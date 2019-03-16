@@ -13,8 +13,15 @@
 </div>
 
 <app-history-filter *ngIf="isFilterShow"></app-history-filter>
-<app-history-table [orders]="orders"></app-history-table>
 
-<div class="center mb2">
-  <button class="btn waves-effect grey darken-1 btn-small">Загрузить еще</button>
-</div>
+<ng-container *ngIf="!reloading; else loader">
+  <app-history-table [orders]="orders"></app-history-table>
+  <ng-container *ngIf="!noMoreLoad">
+    <div class="center mb2" *ngIf="!loading; else loader">
+      <button (click)="loadMore()" class="btn waves-effect grey darken-1 btn-small">Загрузить еще</button>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
