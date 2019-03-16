@@ -12,7 +12,7 @@
   </button>
 </div>
 
-<app-history-filter *ngIf="isFilterShow"></app-history-filter>
+<app-history-filter (onSubmit)="takeFilter($event)" *ngIf="isFilterShow"></app-history-filter>
 
 <ng-container *ngIf="!reloading; else loader">
   <app-history-table [orders]="orders"></app-history-table>

@@ -1,4 +1,4 @@
-import { OrderPositon, Position } from '../shared/interfaces';
+import { OrderPosition, Position } from '../shared/interfaces';
 
 export class OrderPageService {
   list = [];
@@ -6,7 +6,7 @@ export class OrderPageService {
 
   add(position: Position) {
 
-    const orderPosition: OrderPositon = Object.assign({}, {
+    const orderPosition: OrderPosition = Object.assign({}, {
       name: position.name,
       quantity: position.quantity,
       cost: position.cost,
@@ -24,7 +24,7 @@ export class OrderPageService {
 
   }
 
-  remove(position: OrderPositon) {
+  remove(position: OrderPosition) {
     this.list = this.list.filter(p => p._id !== position._id);
     this.computePrice();
 

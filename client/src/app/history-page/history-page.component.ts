@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Filter } from '../shared/interfaces';
 import { MaterialInstance, MaterialService } from '../shared/services/material.service';
 import { OrderService } from '../shared/services/order.service';
 
@@ -63,5 +64,9 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.noMoreLoad = orders.length < COUNT;
       },
     );
+  }
+
+  takeFilter(filter: Filter) {
+    console.log('filter', filter);
   }
 }

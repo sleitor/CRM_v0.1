@@ -25,16 +25,22 @@ export interface Position {
 }
 
 export interface Order {
-  list: OrderPositon[]
+  list: OrderPosition[]
   date?: Date;
   order?: number;
   user?: string;
   _id?: string;
 }
 
-export interface OrderPositon {
+export interface OrderPosition {
   name: string;
   quantity: number;
   cost: number;
   _id?: string;
+}
+
+export interface Filter {
+  number?: number;
+  start?: Date;
+  end?: Date;
 }
