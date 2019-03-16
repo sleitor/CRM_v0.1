@@ -5,7 +5,7 @@
     data-tooltip="Toggle filter"
     data-position="left"
     (click)="isFilterShow = !isFilterShow"
-    [ngClass]="{'active': isFilterShow}"
+    [ngClass]="{'active': isFilterShow, 'red': isFiltered()}"
     #tooltip
   >
     <i class="material-icons">filter_list</i>

@@ -26,6 +26,8 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   loading = false;
   noMoreLoad = false;
 
+  filter: Filter = {};
+
   constructor(
     private orderService: OrderService,
   ) {
@@ -50,11 +52,21 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fetch();
   }
 
+  takeFilter(filter: Filter) {
+    console.log('sdfg');
+    this.filter = filter;
+    this.skip = 0;
+    this.orders = [];
+    this.reloading = true;
+    this.fetch();
+  }
+
+  isFiltered(): boolean {
+    return !!Object.keys(this.filter).length;
+  }
+
   private fetch() {
-    const params = {
-      skip: this.skip,
-      limit: this.limit,
-    };
+    const params = Object.assign({ skip: this.skip, limit: this.limit }, this.filter);
 
     this.oSup = this.orderService.fetch(params).subscribe(
       orders => {
@@ -64,9 +76,5 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.noMoreLoad = orders.length < COUNT;
       },
     );
-  }
-
-  takeFilter(filter: Filter) {
-    console.log('filter', filter);
   }
 }

@@ -8,7 +8,7 @@ import { MaterialDatePicker, MaterialService } from '../../shared/services/mater
   styleUrls: ['./history-filter.component.scss']
 })
 export class HistoryFilterComponent implements OnDestroy, AfterViewInit {
-  number: number;
+  order: number;
   @ViewChild('start') startRef;
   start: MaterialDatePicker;
   @ViewChild('end') endRef;
@@ -30,13 +30,11 @@ export class HistoryFilterComponent implements OnDestroy, AfterViewInit {
   }
 
   applyFilter() {
-    const filter: Filter = {
-      number: this.number,
-      start: this.start.date,
-      end: this.end.date,
-    };
+    const filter: Filter = {};
+    this.order || this.order === 0 ? filter.order = this.order : '';
+    this.start.date ? filter.start = this.start.date : '';
+    this.end.date ? filter.end = this.end.date : '';
 
-    console.log(filter);
     this.onSubmit.emit(filter);
   }
 

@@ -40,7 +40,7 @@ export interface OrderPosition {
 }
 
 export interface Filter {
-  number?: number;
+  order?: number;
   start?: Date;
   end?: Date;
 }
