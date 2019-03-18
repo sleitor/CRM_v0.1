@@ -44,3 +44,15 @@ export interface Filter {
   start?: Date;
   end?: Date;
 }
+
+export interface OverviewData {
+  gain: OverviewItemData;
+  orders: OverviewItemData;
+}
+
+interface OverviewItemData {
+  percent: number;
+  compare: number;
+  yesterday: number;
+  isHigher: boolean;
+}

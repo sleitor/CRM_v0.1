@@ -23,7 +23,7 @@ function calculateGain(allOrders = []) {
 
 module.exports.overview = async (req, res) => {
   try {
-    const allOrders = await Order.find().sort(1).lean();
+    const allOrders = await Order.find().sort({ date: 1 }).lean();
 
     // Orders count
     const ordersCount = allOrders.length;
