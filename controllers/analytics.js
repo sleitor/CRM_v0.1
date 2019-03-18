@@ -82,6 +82,26 @@ module.exports.overview = async (req, res) => {
   }
 };
 
-module.exports.analytics = (req, res) => {
+module.exports.analytics = async (req, res) => {
+
+  try {
+    const
+      allOrders = await Order.find().sort({ date: 1 }).lean(),
+      ordersPerDay = mapPerDay(allOrders),
+      // I think it's a average by day, and not by order
+      average = +(calculateGain(allOrders) / Object.keys(ordersPerDay).length).toFixed(2),
+      chart = Object.keys(ordersPerDay).map(label => {
+        const
+          gain = calculateGain(ordersPerDay[label]),
+          order = ordersPerDay[label].length;
+
+        return { label, gain, order };
+      });
+
+    res.status(200).json({ average, chart });
+  } catch
+    (e) {
+    errorHandler(res, e);
+  }
 
 };
