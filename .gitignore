@@ -63,4 +63,4 @@ typings/
 .next
 
 .idea
-/config/keys.js
+/config/keys.dev.js
