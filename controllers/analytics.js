@@ -6,7 +6,7 @@ function mapPerDay(allOrders = []) {
   const mapped = {};
 
   allOrders.forEach(order => {
-    const day = moment(order.date).format('dd.MM.yyyy');
+    const day = moment(order.date).format('DD.MM.YYYY');
     if (!mapped[day]) mapped[day] = [];
 
     mapped[day].push(order);
@@ -32,7 +32,7 @@ module.exports.overview = async (req, res) => {
     const ordersPerDay = mapPerDay(allOrders);
 
     // yesterdayOrders
-    const yesterdayOrders = ordersPerDay[moment().add(-1, 'd').format('dd.MM.yyyy')] || [];
+    const yesterdayOrders = ordersPerDay[moment().add(-1, 'd').format('DD.MM.YYYY')] || [];
     const yesterdayOrdersNumber = yesterdayOrders.length;
 
     // Orders per day number

@@ -59,7 +59,7 @@ interface OverviewItemData {
 
 export interface AnalyticsData {
   average: number;
-  chart: AnalyticsCartItem;
+  chart: AnalyticsCartItem[];
 }
 
 interface AnalyticsCartItem {
